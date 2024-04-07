@@ -6,13 +6,78 @@ export default function clubMembershipPage({ params }) {
   const { clubId } = params;
 
   return (
-    <div className="grid grid-cols-12">
-      <div className="col-span-2">
+    <div className="flex flex-col">
+      <div className="h-fit z-50">
         <SideBar clubId={clubId}></SideBar>
       </div>
-      <div className="col-span-10">
+      <div className="">
         <DashboardHeader title={"Membership"}></DashboardHeader>
+          <input type="text" placeholder="Search for a member" className=" mx-5 input	 input-bordered"></input>
+          {/*Filter Section Start*/}
+          <section className={"filter flex mx-5 my-3 gap-2 "}>
+              <div className="flex gap-2 items-center">
+                    <p className="text-gray-400">Filter by:</p>
+                    <select className="select border border-gray-700">
+                        <option value="all">All</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+                <div className="flex gap-2 items-center">
+                    <p className="text-gray-400">Sort by:</p>
+                    <select className="select border border-gray-700">
+                        <option value="all">All</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                        <option value="name">Name Ascending</option>
+                        <option value="name">Name Descending</option>
+                    </select>
+                </div>
+          </section>
+            {/*Filter Section End*/}
+            {/*Table Start*/}
+            <div className="overflow-x-auto mx-3">
+                <table className="w-full table table-zebra	">
+                    <thead>
+                        <tr className="bg-gray-100">
+                            <th className="p-2">Name</th>
+                            <th className="p-2">Email</th>
+                            <th className="p-2">Phone</th>
+                            <th className="p-2">Status</th>
+                            <th className="p-2">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td className="p-2">John Doe</td>
+                            <td className="p-2">
+                                <a href="mailto:"> </a>
+                            </td>
+                            <td className="p-2">+254 712 345 678</td>
+                            <td className="p-2">
+                                <span className="p-2 px-4 bg-green-400 text-white rounded-3xl ">Active</span>
+                            </td>
+                            <td className="p-2">
+                                <button className="btn btn-active mx-1 ">Activate</button>
+                                <button className="btn btn-error mx-1 ">Deactivate</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                {/*    Pagination*/}
+                    <tfoot>
+                        <tr>
+                            <td colSpan="5" className="p-2">
+                                <div className="flex justify-between">
+                                    <button className="btn ">Previous</button>
+                                    <button className="btn ">Next</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                {/*Table End*/}
       </div>
     </div>
-  );
+    </div>
+    );
 }

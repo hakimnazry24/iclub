@@ -1,9 +1,13 @@
 export default function DashboardProgramOverview() {
   return (
     <div>
-      <h1 className="p-5 font-bold text-2xl text-indigo-600 shadow-lg rounded-2xl">
-        Program
-      </h1>
+        <div class="card  bg-base-100 shadow-xl">
+            <div class="card-body">
+                <h2 class="card-title">Program Overview</h2>
+                <p>Check to see if your club is on track with its programs.</p>
+
+            </div>
+        </div>
     </div>
   );
 }
