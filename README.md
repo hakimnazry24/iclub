@@ -6,7 +6,7 @@ The ClubManager is a robust platform offering three main functionalities: member
 Clone the repository and then install dependencies
 
 ```sh
-git clone https://github.com/hakimnazry24/ClubManager.git
+git clone https://github.com/plashspeed-aiman/ClubManager.git
 npm install
 ```
 
