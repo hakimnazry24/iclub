@@ -12,6 +12,10 @@ export default function clubMembershipPage({ params }) {
       </div>
       <div className="">
         <DashboardHeader title={"Membership"}></DashboardHeader>
+          <div className="mx-1.5">
+              <button className="btn btn-link">Manage Members</button>
+              <button  className="btn btn-link">Overview</button>
+          </div>
           <input type="text" placeholder="Search for a member" className=" mx-5 input	 input-bordered"></input>
           {/*Filter Section Start*/}
           <section className={"filter flex mx-5 my-3 gap-2 "}>
@@ -48,6 +52,7 @@ export default function clubMembershipPage({ params }) {
                         </tr>
                     </thead>
                     <tbody>
+                    {[1,2,3,4,5].map((item, index) => (
                         <tr>
                             <td className="p-2">John Doe</td>
                             <td className="p-2">
@@ -62,6 +67,9 @@ export default function clubMembershipPage({ params }) {
                                 <button className="btn btn-error mx-1 ">Deactivate</button>
                             </td>
                         </tr>
+
+                    ))}
+
                     </tbody>
                 {/*    Pagination*/}
                     <tfoot>
