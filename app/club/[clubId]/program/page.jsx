@@ -12,11 +12,11 @@ export default function clubProgramPage({ params }) {
   const { clubId } = params;
   console.log(params);
   return (
-    <div className="grid grid-cols-12">
-      <div className="col-span-2">
+    <div className="flex flex-col">
+      <div className="z-50">
         <SideBar clubId={clubId}></SideBar>
       </div>
-      <div className="col-span-10">
+      <div className="">
         <DashboardHeader title={"Program"}></DashboardHeader>
         <div className="mx-20">
           <button className="p-3 rounded-3xl text-indigo-600 font-bold border-2 border-indigo-600 hover:text-white hover:bg-indigo-600 float-right"><a href="./program/add-program">Add New Program</a></button>
@@ -33,6 +33,7 @@ export default function clubProgramPage({ params }) {
               <th>Status</th>
             </tr>
           </thead>
+          <tbody>
           <tr>
             <td>1</td>
             <td className="text-indigo-600 hover:text-indigo-600/80">
@@ -121,6 +122,7 @@ export default function clubProgramPage({ params }) {
               <ReportPending></ReportPending>
             </td>
           </tr>
+          </tbody>
         </table>
       </div>
     </div>

@@ -1,11 +1,16 @@
+'use client'
+
 import SideBar from "@/components/SideBar";
 import DashboardHeader from "@/components/DashboardHeader";
 
+import { useRouter } from 'next/navigation'
 
 export default function clubMembershipPage({ params }) {
   const { clubId } = params;
+const router = useRouter()
 
-  return (
+
+    return (
     <div className="flex flex-col">
       <div className="h-fit z-50">
         <SideBar clubId={clubId}></SideBar>
@@ -13,7 +18,9 @@ export default function clubMembershipPage({ params }) {
       <div className="">
         <DashboardHeader title={"Membership"}></DashboardHeader>
           <div className="mx-1.5">
-              <button className="btn btn-link">Manage Members</button>
+              <button onClick={ ()=>
+                   router.push(`/club/${clubId}/membership/manage`)
+              }  className="btn btn-link">Manage Members</button>
               <button  className="btn btn-link">Overview</button>
           </div>
           <input type="text" placeholder="Search for a member" className=" mx-5 input	 input-bordered"></input>

@@ -10,16 +10,17 @@ export default function addProgramPage({ params }) {
 
   const { clubId } = params;
   return (
-    <div className="grid grid-cols-12">
-      <div className="col-span-2">
+    <div className="flex flex-col">
+      <div className="">
         <SideBar clubId={clubId}></SideBar>
       </div>
-      <div className="col-span-10">
+      <div className="">
         <DashboardHeader title={"Program"}></DashboardHeader>
-        <div className="m-10">
+        <div className="mx-5 my-5">
           <h2 className="text-xl font-bold text-indigo-600">Add New Program</h2>
           <form action={ addNewProgram } >
-            <table>
+            <table className="w-full">
+              <tbody>
               <tr>
                 <td>Program name</td>
                 <td>
@@ -109,6 +110,7 @@ export default function addProgramPage({ params }) {
                   />
                 </td>
               </tr>
+              </tbody>
             </table>
             <button className="p-3 rounded-3xl text-indigo-600 font-bold border-2 border-indigo-600 hover:text-white hover:bg-indigo-600 mt-5">Add new program</button>
           </form>
