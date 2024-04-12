@@ -1,3 +1,5 @@
+import {Member} from "./Member";
+
 class Club {
     constructor(
         public id: number,

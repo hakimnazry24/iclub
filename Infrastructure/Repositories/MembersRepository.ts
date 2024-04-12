@@ -1,13 +1,12 @@
 
 //a simple prisma repository for members
-import {Membership, PrismaClient} from '@prisma/client';
-import { Member } from '../../Domain/Entities/Member';
+import {Member, PrismaClient} from '@prisma/client';
 import {IGenericRepository} from "../../Domain/Repository/IGenericRepository";
 
-export class MembersRepository implements IGenericRepository<Membership> {
+export class MembersRepository implements IGenericRepository<Member> {
 
 
-    create(entity: Membership): Promise<Membership> {
+    create(entity: Member): Promise<Member> {
         return Promise.resolve(undefined);
     }
 
@@ -15,15 +14,15 @@ export class MembersRepository implements IGenericRepository<Membership> {
         return Promise.resolve(undefined);
     }
 
-    get(): Promise<Membership[]> {
+    get(): Promise<Member[]> {
         return Promise.resolve([]);
     }
 
-    getById(id: number): Promise<Membership> {
+    getById(id: number): Promise<Member> {
         return Promise.resolve(undefined);
     }
 
-    update(entity: Membership): Promise<Membership> {
+    update(entity: Member): Promise<Member> {
         return Promise.resolve(undefined);
     }
 

@@ -3,30 +3,29 @@
 import SideBar from "@/components/SideBar";
 import DashboardHeader from "@/components/DashboardHeader";
 
-import { useRouter } from 'next/navigation'
+import {useRouter} from 'next/navigation'
 
-export default function clubMembershipPage({ params }) {
-  const { clubId } = params;
-const router = useRouter()
+export default function clubMembershipPage({params}) {
+    const {clubId} = params;
+// eslint-disable-next-line react-hooks/rules-of-hooks
+    const router = useRouter()
 
 
     return (
-    <div className="flex flex-col">
-      <div className="h-fit z-50">
-        <SideBar clubId={clubId}></SideBar>
-      </div>
-      <div className="">
-        <DashboardHeader title={"Membership"}></DashboardHeader>
-          <div className="mx-1.5">
-              <button onClick={ ()=>
-                   router.push(`/club/${clubId}/membership/manage`)
-              }  className="btn btn-link">Manage Members</button>
-              <button  className="btn btn-link">Overview</button>
-          </div>
-          <input type="text" placeholder="Search for a member" className=" mx-5 input	 input-bordered"></input>
-          {/*Filter Section Start*/}
-          <section className={"filter flex mx-5 my-3 gap-2 "}>
-              <div className="flex gap-2 items-center">
+
+        <div className="w-full">
+            <DashboardHeader title={"Membership"}></DashboardHeader>
+            <div className="mx-1.5">
+                <button onClick={() =>
+                    router.push(`/club/${clubId}/membership/manage`)
+                } className="btn btn-link">Manage Members
+                </button>
+                <button className="btn btn-link">Overview</button>
+            </div>
+            <input type="text" placeholder="Search for a member" className=" mx-5 input	 input-bordered"></input>
+            {/*Filter Section Start*/}
+            <section className={"filter flex mx-5 my-3 gap-2 "}>
+                <div className="flex gap-2 items-center">
                     <p className="text-gray-400">Filter by:</p>
                     <select className="select border border-gray-700">
                         <option value="all">All</option>
@@ -44,23 +43,23 @@ const router = useRouter()
                         <option value="name">Name Descending</option>
                     </select>
                 </div>
-          </section>
+            </section>
             {/*Filter Section End*/}
             {/*Table Start*/}
             <div className="overflow-x-auto mx-3">
-                <table className="w-full table table-zebra	">
+                <table className="w-full  table-zebra">
                     <thead>
-                        <tr className="bg-gray-100">
-                            <th className="p-2">Name</th>
-                            <th className="p-2">Email</th>
-                            <th className="p-2">Phone</th>
-                            <th className="p-2">Status</th>
-                            <th className="p-2">Actions</th>
-                        </tr>
+                    <tr className="bg-gray-100">
+                        <th className="p-2">Name</th>
+                        <th className="p-2">Email</th>
+                        <th className="p-2">Phone</th>
+                        <th className="p-2">Status</th>
+                        <th className="p-2">Actions</th>
+                    </tr>
                     </thead>
                     <tbody>
-                    {[1,2,3,4,5].map((item, index) => (
-                        <tr>
+                    {[1, 2, 3, 4, 5].map((item, index) => (
+                        <tr key={index}>
                             <td className="p-2">John Doe</td>
                             <td className="p-2">
                                 <a href="mailto:"> </a>
@@ -78,21 +77,19 @@ const router = useRouter()
                     ))}
 
                     </tbody>
-                {/*    Pagination*/}
                     <tfoot>
-                        <tr>
-                            <td colSpan="5" className="p-2">
-                                <div className="flex justify-between">
-                                    <button className="btn ">Previous</button>
-                                    <button className="btn ">Next</button>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td colSpan="5" className="p-2">
+                            <div className="flex justify-between">
+                                <button className="btn ">Previous</button>
+                                <button className="btn ">Next</button>
+                            </div>
+                        </td>
+                    </tr>
                     </tfoot>
                 </table>
                 {/*Table End*/}
-      </div>
-    </div>
-    </div>
+            </div>
+        </div>
     );
 }

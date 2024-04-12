@@ -3,16 +3,18 @@ export class Member {
         public id: number,
         public name: string,
         public clubId: number,
-        public roleId : number
+        public roleId : number,
+        public membershipStatus: string
     ) {
         this.id = id;
         this.name = name;
         this.clubId = clubId;
         this.roleId = roleId;
+        this.membershipStatus = "Active";
 }
 
     public static fromJSON(json: any): Member {
-        return new Member(json.id, json.name, json.clubId, json.roleId);
+        return new Member(json.id, json.name, json.clubId, json.roleId, json.membershipStatus);
     }
 
     public toJSON(): any {

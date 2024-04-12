@@ -9,39 +9,50 @@ datasource db {
 
 model Club {
   // id          String       @id @default(auto()) @map("_id") @db.ObjectId
-  id          String       @id         @default(uuid())
-  name        String       @unique
+  id          String   @id @default(uuid())
+  name        String   @unique
   description String
-  dateCreated DateTime     @default(now())
-  Membership  Membership[]
+  dateCreated DateTime @default(now())
+  Members     Member[]
 }
 
-model Membership {
-  id          String       @id         @default(uuid())
-  User             User?       @relation(fields: [userId], references: [id])
-  userId           String?     
-  club             Club        @relation(fields: [clubId], references: [id])
-  joinDate         DateTime    @default(now())
-  membershipStatus Boolean     @default(true)
-  posititon        String      @default("active member")
-  commitee         Committee[]
+model Member {
+  id               String       @id @default(uuid())
+  name             String?
+  club             Club?        @relation(fields: [clubId], references: [id])
+  joinDate         DateTime?    @default(now())
+  membershipStatus Boolean?     @default(true)
+  posititon        String?      @default("active member")
+  clubId           String?
+  Role             Role?        @relation(fields: [roleId], references: [id])
+  roleId           String?
+  MemberInfo       MemberInfo[]
+  Committee        Committee[]
+}
 
-  clubId String 
+model MemberInfo {
+  id          String   @id @default(uuid())
+  member      Member   @relation(fields: [memberId], references: [id])
+  memberId    String
+  fullname    String
+  email       String   @unique
+  phoneNo     Int      @unique
+  dateCreated DateTime @default(now())
+  dateUpdated DateTime @updatedAt
 }
 
 model User {
-  id          String       @id         @default(uuid())
-  username    String       @unique
+  id          String   @id @default(uuid())
+  username    String   @unique
   fullname    String
-  email       String       @unique
-  phoneNo     Int          @unique
-  membership  Membership[]
-  dateCreated DateTime     @default(now())
-  dateUpdated DateTime     @updatedAt
+  email       String   @unique
+  phoneNo     Int      @unique
+  dateCreated DateTime @default(now())
+  dateUpdated DateTime @updatedAt
 }
 
 model Program {
-  id          String       @id         @default(uuid())
+  id                String      @id @default(uuid())
   name              String
   description       String
   dateStart         DateTime
@@ -53,10 +64,18 @@ model Program {
 }
 
 model Committee {
-  id          String       @id         @default(uuid())
+  id        String   @id @default(uuid())
+  Program   Program? @relation(fields: [programId], references: [id])
+  programId String?
+  Members   Member?  @relation(fields: [memberId], references: [id])
+  memberId  String?
+}
 
-  Program      Program?    @relation(fields: [programId], references: [id])
-  programId    String?     
-  Membership   Membership? @relation(fields: [membershipId], references: [id])
-  membershipId String?     
+model Role {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String
+  dateCreated DateTime @default(now())
+  dateUpdated DateTime @updatedAt
+  Member      Member[]
 }
