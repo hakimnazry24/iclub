@@ -10,10 +10,7 @@ export default function addProgramPage({ params }) {
 
   const { clubId } = params;
   return (
-    <div className="flex flex-col">
-      <div className="">
-        <SideBar clubId={clubId}></SideBar>
-      </div>
+
       <div className="">
         <DashboardHeader title={"Program"}></DashboardHeader>
         <div className="mx-5 my-5">
@@ -116,6 +113,5 @@ export default function addProgramPage({ params }) {
           </form>
         </div>
       </div>
-    </div>
   );
 }

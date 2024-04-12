@@ -1,10 +1,12 @@
 'use client';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Navbar from "@/components/Navbar";
 import SideBar from "@/components/SideBar";
-
+import { useRouter } from "next/navigation";
 export default function NavbarWithSidebar({ children }) {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const dynamicRoute = useRouter()
+    // useEffect(() => setIsSidebarOpen(false), [dynamicRoute]);
     return (
         <>
             <section className=''>

@@ -4,13 +4,9 @@ import DashboardHeader from "@/components/DashboardHeader";
 export default function clubFinancialPage({ params }) {
   const { clubId } = params;
   return (
-    <div className="grid grid-cols-12">
-      <div className="col-span-2">
-        <SideBar clubId={clubId}></SideBar>
-      </div>
-      <div className="col-span-10">
+
+      <div className="">
         <DashboardHeader title={"Financial"}></DashboardHeader>
       </div>
-    </div>
   );
 }

@@ -35,28 +35,76 @@ export default function Page({ params }) {
     <div className='flex flex-col'>
 
         <div className="">
-          <DashboardHeader title={"Membership"}></DashboardHeader>
+            <DashboardHeader title={"Membership"}></DashboardHeader>
+            <h2 className="font-bold m-5">Membership Management</h2>
+
         </div>
-      <div>
-        <div className="card  bg-base-100 shadow-xl">
-            <div className="card-body">
-                <h2 className="card-title">Membership Management</h2>
-                <p>Register Member</p>
-                <form onSubmit={async (e)=> registerMember(e)}>
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text
-                            ">Name</span>
-                        </label>
-                        <input type="text" onChange={(e)=> setUsername(e.target.value)} placeholder="Name" class="input input-bordered" />
-                        <button type='submit' className="btn btn-primary">Register</button>
+        <div>
+            <div className=" bg-base-100 ">
+            <div className="p-2">
+                <form>
+                    <table className="w-full">
+                        <tbody>
+                        <tr>
+                            <td>Name</td>
+                            <td>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    placeholder="Abdul John"
+                                    className="bg-slate-100 p-3 rounded-2xl w-full"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Telephone Number</td>
+                            <td>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    placeholder="+60123456789"
+                                    className="bg-slate-100 p-3 rounded-2xl w-full"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    placeholder="user@email.com"
+                                    className="bg-slate-100 p-3 rounded-2xl w-full"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Role</td>
+                            <td>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    placeholder="Role:e.g. President, Secretary, Treasurer"
+                                    className="bg-slate-100 p-3 rounded-2xl w-full"
+                                />
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div className='flex w-full justify-end'>
+                        <button type='submit'
+                                className="p-3 mx-2.5 my-5 rounded-3xl text-indigo-600 font-bold border-2 border-indigo-600 hover:text-white hover:bg-indigo-600 ">Register
+                            Member
+                        </button>
                     </div>
+
+
                 </form>
+            </div>
             </div>
         </div>
     </div>
-    </div>
 
         </>
-  );
+    );
 }
