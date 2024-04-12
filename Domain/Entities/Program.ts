@@ -1,6 +1,6 @@
-import {ProgramComittee} from "./ProgramComittee";
+import { ProgramCommittee } from "./ProgramComittee";
 
-class Program{
+export class Program {
     constructor(
         public id: number,
         public name: string,
@@ -10,24 +10,16 @@ class Program{
         public startDate: Date,
         public endDate: Date,
         public status: boolean,
-        public programComittee: ProgramComittee[] = []
-    ){
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.duration = duration;
-        this.price = price;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.status = status;
-        this.programComittee = programComittee;
-    }
+        public programCommittee: ProgramCommittee[] = []
+    ) {}
 
     public static fromJSON(json: any): Program {
-        return new Program(json.id, json.name, json.description, json.duration, json.price, json.startDate, json.endDate, json.status);
+        const programCommittee = json.programCommittee.map((pc: any) => ProgramCommittee.fromJSON(pc));
+        return new Program(json.id, json.name, json.description, json.duration, json.price, new Date(json.startDate), new Date(json.endDate), json.status, programCommittee);
     }
 
     public toJSON(): any {
+        const programCommittee = this.programCommittee.map((pc: ProgramCommittee) => pc.toJSON());
         return {
             id: this.id,
             name: this.name,
@@ -36,11 +28,14 @@ class Program{
             price: this.price,
             startDate: this.startDate,
             endDate: this.endDate,
-            status: this.status
+            status: this.status,
+            programCommittee: programCommittee
         };
     }
 
-    public addProgramComittee(programComittee: ProgramComittee){
-        this.programComittee.push(programComittee);
+    public addProgramComittee(programComittee: ProgramCommittee): void {
+        if (programComittee) {
+            this.programCommittee.push(programComittee);
+        }
     }
 }
