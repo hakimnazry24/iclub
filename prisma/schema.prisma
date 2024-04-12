@@ -19,10 +19,12 @@ model Club {
 model Member {
   id               String       @id @default(uuid())
   name             String?
+  email            String?
+  telephone        String?
   club             Club?        @relation(fields: [clubId], references: [id])
   joinDate         DateTime?    @default(now())
-  membershipStatus Boolean?     @default(true)
-  posititon        String?      @default("active member")
+  membershipStatus String?      @default("Active")
+  position         String?      @default("active member")
   clubId           String?
   Role             Role?        @relation(fields: [roleId], references: [id])
   roleId           String?

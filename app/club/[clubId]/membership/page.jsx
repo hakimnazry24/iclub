@@ -1,24 +1,32 @@
-'use client'
 
 import SideBar from "@/components/SideBar";
 import DashboardHeader from "@/components/DashboardHeader";
 
 import {useRouter} from 'next/navigation'
+import {useMembershipService} from "@/app/Services/MembershipService";
+import {Member} from "@/Domain/Entities/Member";
+import {type} from "node:os";
+import Link from "next/link";
 
-export default function clubMembershipPage({params}) {
+export default async function ClubMembershipPage({params}) {
     const {clubId} = params;
 // eslint-disable-next-line react-hooks/rules-of-hooks
+/*
     const router = useRouter()
-
+*/
+    const membershipService = useMembershipService();
+    // jsdoc
+    /**
+     * @type {Member[]}
+     */
+    const members = await membershipService.getMembers(clubId);
 
     return (
         <div className="w-full">
             <DashboardHeader title={"Membership"}></DashboardHeader>
             <div className="mx-1.5">
-                <button onClick={() =>
-                    router.push(`/club/${clubId}/membership/manage`)
-                } className="btn btn-link">Manage Members
-                </button>
+                <Link href='./membership/manage' className="btn btn-link">Manage Members
+                </Link>
                 <button className="btn btn-link">Overview</button>
             </div>
             <input type="text" placeholder="Search for a member" className=" mx-5 input	 input-bordered"></input>
@@ -57,13 +65,13 @@ export default function clubMembershipPage({params}) {
                     </tr>
                     </thead>
                     <tbody>
-                    {[1, 2, 3, 4, 5].map((item, index) => (
+                    {members.map((item, index) => (
                         <tr key={index}>
-                            <td className="p-2">John Doe</td>
+                            <td className="p-2">{item.name}</td>
                             <td className="p-2">
-                                <a href="mailto:"> </a>
+                                <a href="mailto:">{item.email}</a>
                             </td>
-                            <td className="p-2">+254 712 345 678</td>
+                            <td className="p-2">{item.telephone}</td>
                             <td className="p-2">
                                 <span className="p-2 px-4 bg-green-400 text-white rounded-3xl ">Active</span>
                             </td>

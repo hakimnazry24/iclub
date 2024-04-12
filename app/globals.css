@@ -10,3 +10,12 @@ th, td {
 #program-table > tr:nth-child(even) {
     background-color: #f2f2f2;
 }
+
+.alert {
+    /* your other styles */
+    opacity: 0; /* initially hide the popup */
+}
+
+.alert.show {
+    opacity: 1; /* show the popup */
+}

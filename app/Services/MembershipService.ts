@@ -1,5 +1,5 @@
 //import prisma
-import { Member,PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 //@ts-ignore
 import { Member as MemberDomain} from "@/Domain/Entities/Member" ;
 class MembershipService {
@@ -12,6 +12,8 @@ class MembershipService {
             return this.prismaClient.member.create({
                 data: {
                     name: member.name,
+                    email: member.email,
+                    telephone: member.telephone,
                 }
             });
         }
@@ -25,8 +27,19 @@ class MembershipService {
 
 
 
-  getMembers() {
-    return this.prismaClient.member.findMany();
+  async getMembers() {
+    try {
+        const members = await this.prismaClient.member.findMany();
+        return members.map((member) => {
+            return new MemberDomain(member.id.toString(), member.name, member.email, member.telephone, null,null, member.membershipStatus);
+        })
+    }
+    catch (error) {
+      throw new Error(error);
+    }
+    finally {
+      await this.prismaClient.$disconnect();
+    }
   }
 
 
