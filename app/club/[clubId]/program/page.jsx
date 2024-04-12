@@ -21,16 +21,16 @@ export default function clubProgramPage({ params }) {
         <div className="mx-20">
           <button className="p-3 rounded-3xl text-indigo-600 font-bold border-2 border-indigo-600 hover:text-white hover:bg-indigo-600 float-right"><a href="./program/add-program">Add New Program</a></button>
         </div>
-        <table className="table w-full text-left overflow-hidden" id="program-table">
+        <table className="z-10 table w-full text-left overflow-hidden" id="program-table">
           <thead>
             <tr>
-              <th>No</th>
-              <th>Programmes/Events/Activities</th>
-              <th>Name of PIC</th>
-              <th>Date start</th>
-              <th>Date end</th>
-              <th>Duration</th>
-              <th>Status</th>
+              <td>No</td>
+              <td>Programmes/Events/Activities</td>
+              <td>Name of PIC</td>
+              <td>Date start</td>
+              <td>Date end</td>
+              <td>Duration</td>
+              <td>Status</td>
             </tr>
           </thead>
           <tbody>

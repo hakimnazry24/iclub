@@ -12,7 +12,6 @@ export default function clubMembershipPage({params}) {
 
 
     return (
-
         <div className="w-full">
             <DashboardHeader title={"Membership"}></DashboardHeader>
             <div className="mx-1.5">
@@ -47,7 +46,7 @@ export default function clubMembershipPage({params}) {
             {/*Filter Section End*/}
             {/*Table Start*/}
             <div className="overflow-x-auto mx-3">
-                <table className="w-full  table-zebra">
+                <table className="w-full table  table-zebra">
                     <thead>
                     <tr className="bg-gray-100">
                         <th className="p-2">Name</th>
