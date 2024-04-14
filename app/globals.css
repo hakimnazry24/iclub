@@ -14,8 +14,10 @@ th, td {
 .alert {
     /* your other styles */
     opacity: 0; /* initially hide the popup */
+
 }
 
 .alert.show {
-    opacity: 1; /* show the popup */
+    opacity: 100%; /* show the popup */
+
 }
