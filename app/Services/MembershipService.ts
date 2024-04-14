@@ -42,6 +42,19 @@ class MembershipService {
     }
   }
 
+  async countMembers() {
+    try {
+      return await this.prismaClient.member.count();
+    }
+    catch (error) {
+      throw new Error(error);
+    }
+    finally {
+      await this.prismaClient.$disconnect();
+    }
+
+  }
+
 
 }
 

@@ -4,7 +4,15 @@ import SideBar from "@/components/SideBar";
 import {useMembershipService} from "@/app/Services/MembershipService";
 import {Member} from "@/Domain/Entities/Member";
 import {useEffect, useState} from "react";
+import SubmissionMessage from "@/app/club/[clubId]/membership/manage/SubmissionMessage";
 
+
+const MessageTypes={
+    SUCCESS:"success",
+    ERROR:"error",
+    WARNING:"warning"
+
+}
 
 export default function Page({ params }) {
     const { clubId } = params;
@@ -12,14 +20,30 @@ export default function Page({ params }) {
     const [telephone, setTelephone] = useState("");
     const [email, setEmail] = useState("");
     const [role, setRole] = useState("");
+    const [messageType, setMessageType] = useState("success");
+    const [roles, setRoles] = useState([]);
 
     const [showPopup, setShowPopup] = useState(false);
-    const [Message, setMessage] = useState("Member Registered Successfully");
+    const [message, setMessage] = useState("Member Registered Successfully");
+
     useEffect(() => {
+        //call api to get roles
+        fetch('/api/roles', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json())
+            .then(data => {
+                setRoles(data);
+            })
+
+
+
         if (showPopup) {
             const timer = setTimeout(() => {
                 setShowPopup(false);
-            }, 2000);
+            }, 1500);
 
             return () => clearTimeout(timer);
         }
@@ -28,6 +52,7 @@ export default function Page({ params }) {
     const validate = () => {
         if (username === "" || telephone === "" || email === "" || role === "") {
             setMessage("Please fill in all the fields")
+            setMessageType(MessageTypes.ERROR)
             setShowPopup(true);
             return false;
         }
@@ -54,6 +79,7 @@ export default function Page({ params }) {
          })
         if (res.status === 200) {
             setMessage("Member Registered Successfully");
+            setMessageType(MessageTypes.SUCCESS)
             await setShowPopup(true);
             setUsername("");
             setTelephone("");
@@ -63,11 +89,13 @@ export default function Page({ params }) {
         }
         else {
             setMessage("Error Registering Member")
+            setMessageType(MessageTypes.ERROR)
             setShowPopup(true);
         }
 
         }catch (e){
             setMessage("Error Registering Member" + e.message)
+            setMessageType(MessageTypes.ERROR)
             setShowPopup(true);
         }
 /*
@@ -80,14 +108,7 @@ export default function Page({ params }) {
     return (
         <>
             <div className='flex flex-col'>
-                { (<div role="alert" className={` ${showPopup ? "alert show" : "alert"} m-5 w-fit z-50 absolute transition-opacity duration-200 ease-in-out `}>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                         className="stroke-info shrink-0 w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                    <span>{Message}</span>
-                </div>)}
+               <SubmissionMessage showPopup={showPopup} Message={message} Type={messageType}/>
                 <div className="">
                     <DashboardHeader title={"Membership"}></DashboardHeader>
                     <h2 className="font-bold m-5">Membership Management</h2>
@@ -141,14 +162,16 @@ export default function Page({ params }) {
                                     <tr>
                                         <td>Role</td>
                                         <td>
-                                            <input
+                                            <select
                                                 onChange={(e) => setRole(e.target.value)}
-                                                type="text"
                                                 name="name"
                                                 value={role}
-                                                placeholder="Role:e.g. President, Secretary, Treasurer"
-                                                className="bg-slate-100 p-3 rounded-2xl w-full"
-                                            />
+                                                className="bg-slate-100 p-3 rounded-2xl w-full">
+                                                {roles.map((role, index) => (
+                                                    <option key={index} value={role.name}>{role.name}</option>
+                                                ))}
+                                            </select>
+
                                         </td>
                                     </tr>
                                     </tbody>
