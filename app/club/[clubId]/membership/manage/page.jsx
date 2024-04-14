@@ -21,12 +21,25 @@ export default function Page({ params }) {
     const [email, setEmail] = useState("");
     const [role, setRole] = useState("");
     const [messageType, setMessageType] = useState("success");
-
+    const [roles, setRoles] = useState([]);
 
     const [showPopup, setShowPopup] = useState(false);
     const [message, setMessage] = useState("Member Registered Successfully");
 
     useEffect(() => {
+        //call api to get roles
+        fetch('/api/roles', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json())
+            .then(data => {
+                setRoles(data);
+            })
+
+
+
         if (showPopup) {
             const timer = setTimeout(() => {
                 setShowPopup(false);
@@ -149,14 +162,16 @@ export default function Page({ params }) {
                                     <tr>
                                         <td>Role</td>
                                         <td>
-                                            <input
+                                            <select
                                                 onChange={(e) => setRole(e.target.value)}
-                                                type="text"
                                                 name="name"
                                                 value={role}
-                                                placeholder="Role:e.g. President, Secretary, Treasurer"
-                                                className="bg-slate-100 p-3 rounded-2xl w-full"
-                                            />
+                                                className="bg-slate-100 p-3 rounded-2xl w-full">
+                                                {roles.map((role, index) => (
+                                                    <option key={index} value={role.name}>{role.name}</option>
+                                                ))}
+                                            </select>
+
                                         </td>
                                     </tr>
                                     </tbody>

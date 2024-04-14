@@ -27,7 +27,8 @@ export default async function ClubMembershipPage({params}) {
             <div className="mx-1.5">
                 <Link href='./membership/manage' className="btn btn-link">Manage Members
                 </Link>
-                <button className="btn btn-link">Overview</button>
+                <Link href='./membership/overview' className="btn btn-link">Overview
+                </Link>
             </div>
             <input type="text" placeholder="Search for a member" className=" mx-5 input	 input-bordered"></input>
             {/*Filter Section Start*/}

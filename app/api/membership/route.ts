@@ -19,3 +19,4 @@ export async function POST(req: NextRequest) {
     const response = await membershipService.addMember(member)
     return NextResponse.json(member);
 }
+
