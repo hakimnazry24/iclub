@@ -1,18 +1,16 @@
-import {useRoleService} from "@/app/Services/RoleService";
 import {Role} from "@/Domain/Entities/Role";
 
 export default  function AddRoleDialog({id}) {
 
     const submitRole= async (role) => {
-        const response =await fetch('/api/roles', {
+        return await fetch('/api/roles', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(role)
 
-        })
-        return response;
+        });
     }
     const addRole = async (e) => {
 

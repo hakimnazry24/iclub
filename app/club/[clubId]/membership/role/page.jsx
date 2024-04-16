@@ -26,7 +26,7 @@ export default function RolePage(){
             <div className='flex flex-col border mx-2 my-3 rounded'>
                 {/*<SubmissionMessage showPopup={showPopup} Message={message} Type={messageType}/>*/}
                 <div className="">
-                    <DashboardHeader title={"Membership"}></DashboardHeader>
+                    <DashboardHeader title={"Membership"} />
                     <h2 className="font-bold m-5">Role Management</h2>
                     <button onClick={() => document.getElementById('my_modal_1').showModal()} className="mx-3 btn btn-outline">Add Role</button>
                 </div>

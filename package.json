@@ -24,6 +24,7 @@
     "winston": "^3.13.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.7.0",
     "@types/react": "18.2.77",
     "autoprefixer": "^10.0.1",
     "daisyui": "^4.10.1",

@@ -1,12 +1,12 @@
 
-import SideBar from "@/components/SideBar";
 import DashboardHeader from "@/components/DashboardHeader";
+import SideBar from "@/components/SideBar";
 
-import {useRouter} from 'next/navigation'
-import {useMembershipService} from "@/app/Services/MembershipService";
-import {Member} from "@/Domain/Entities/Member";
 import {type} from "node:os";
+import {Member} from "@/Domain/Entities/Member";
+import {useMembershipService} from "@/app/Services/MembershipService";
 import Link from "next/link";
+import {useRouter} from 'next/navigation'
 
 export default async function ClubMembershipPage({params}) {
     const {clubId} = params;
@@ -23,7 +23,7 @@ export default async function ClubMembershipPage({params}) {
 
     return (
         <div className=" mx-2 my-3 border  rounded ">
-            <DashboardHeader title={"Membership"}></DashboardHeader>
+            <DashboardHeader title={"Membership"} />
             <div className="mx-1.5">
                 <Link href='./membership/manage' className="btn btn-link">Manage Members
                 </Link>
@@ -35,7 +35,7 @@ export default async function ClubMembershipPage({params}) {
             {/*Filter Section Start*/}
             <section className={"filter flex mx-5 my-3 gap-2 "}>
                 <input type="text" placeholder="Search for a member"
-                       className=" mr-auto input input-bordered"></input>
+                       className=" mr-auto input input-bordered" />
                 <div className="flex gap-2 items-center">
                     <p className="text-gray-400">Filter by:</p>
                     <select className="select border border-gray-700">
@@ -82,8 +82,8 @@ export default async function ClubMembershipPage({params}) {
                                 <span className="p-2 px-4 bg-green-400 text-white rounded-3xl ">Active</span>
                             </td>
                             <td className="p-2">
-                                <button className="btn btn-active mx-1 ">Activate</button>
-                                <button className="btn btn-error mx-1 ">Deactivate</button>
+                                <button type='button' className="btn btn-active mx-1 ">Activate</button>
+                                <button type='button' className="btn btn-error mx-1 ">Deactivate</button>
                             </td>
                         </tr>
 
@@ -94,8 +94,8 @@ export default async function ClubMembershipPage({params}) {
                     <tr>
                         <td colSpan="5" className="p-2">
                             <div className="flex justify-between">
-                                <button className="btn ">Previous</button>
-                                <button className="btn ">Next</button>
+                                <button type='button' className="btn ">Previous</button>
+                                <button type='button' className="btn ">Next</button>
                             </div>
                         </td>
                     </tr>
