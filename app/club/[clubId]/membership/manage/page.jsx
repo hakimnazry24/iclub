@@ -183,7 +183,7 @@ export default function Page({ params }) {
                                 </table>
                                 <div className='flex w-full justify-end'>
                                     <button type='submit'
-                                            className="p-3 mx-2.5 my-5 rounded-3xl text-indigo-600 font-bold border-2 border-indigo-600 hover:text-white hover:bg-indigo-600 ">Register
+                                            className="mx-2.5 my-5 rounded-3xl btn btn-outline border-indigo-600 border-2 text-indigo-600 hover:border-indigo-600 hover:bg-indigo-600">Register
                                         Member
                                     </button>
                                 </div>

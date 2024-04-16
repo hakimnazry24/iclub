@@ -32,7 +32,7 @@ export default function RolePage(){
                     <DashboardHeader title={"Membership"} />
                     </div>
                     <h2 className="font-bold m-5">Role Management</h2>
-                    <button onClick={() => document.getElementById('my_modal_1').showModal()} className="mx-3 btn btn-outline">Add Role</button>
+                    <button onClick={() => document.getElementById('my_modal_1').showModal()} className="mx-4 btn btn-sm ">Add Role</button>
                 </div>
 
                 <AddRoleDialog id='my_modal_1'/>

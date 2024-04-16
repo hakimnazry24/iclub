@@ -59,8 +59,8 @@ export default async function ClubMembershipPage({params}) {
             </section>
             {/*Filter Section End*/}
             {/*Table Start*/}
-            <div className="overflow-x-auto ">
-            <table className="w-full my-2 mx-3 table  table-zebra">
+            <div className="overflow-x-auto px-3  py-2">
+            <table className="overflow-x-hidden border  table table-fixed  table-zebra">
                     <thead>
                     <tr className="bg-gray-100">
                         <th className="p-2">Name</th>

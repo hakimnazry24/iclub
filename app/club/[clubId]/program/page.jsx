@@ -21,6 +21,9 @@ export default function clubProgramPage({params}) {
             <Link
                 className="link-primary text-sm font-bold hover:underline mt-5 ml-5"
                 href="./program/add-event">Calendar View</Link>
+            <Link
+                className="link-primary text-sm font-bold hover:underline mt-5 ml-5"
+                href="./program/add-event">Almanac </Link>
             <table className="my-5  table table-zebra  overflow-hidden" id="program-table">
                 <thead>
                 <tr>
