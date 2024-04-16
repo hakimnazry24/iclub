@@ -22,17 +22,20 @@ export default async function ClubMembershipPage({params}) {
     const members = await membershipService.getMembers(clubId);
 
     return (
-        <div className="w-full">
+        <div className=" mx-2 my-3 border  rounded ">
             <DashboardHeader title={"Membership"}></DashboardHeader>
             <div className="mx-1.5">
                 <Link href='./membership/manage' className="btn btn-link">Manage Members
                 </Link>
                 <Link href='./membership/overview' className="btn btn-link">Overview
                 </Link>
+                <Link href='./membership/role' className="btn btn-link">Role Management
+                </Link>
             </div>
-            <input type="text" placeholder="Search for a member" className=" mx-5 input	 input-bordered"></input>
             {/*Filter Section Start*/}
             <section className={"filter flex mx-5 my-3 gap-2 "}>
+                <input type="text" placeholder="Search for a member"
+                       className=" mr-auto input input-bordered"></input>
                 <div className="flex gap-2 items-center">
                     <p className="text-gray-400">Filter by:</p>
                     <select className="select border border-gray-700">
@@ -51,11 +54,13 @@ export default async function ClubMembershipPage({params}) {
                         <option value="name">Name Descending</option>
                     </select>
                 </div>
+
+
             </section>
             {/*Filter Section End*/}
             {/*Table Start*/}
-            <div className="overflow-x-auto mx-3">
-                <table className="w-full table  table-zebra">
+            <div className="overflow-x-auto ">
+            <table className="w-full my-2 mx-3 table  table-zebra">
                     <thead>
                     <tr className="bg-gray-100">
                         <th className="p-2">Name</th>

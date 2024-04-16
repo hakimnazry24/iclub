@@ -10,4 +10,13 @@ export  class Role {
         this.description = description;
     }
 
+    toDto() {
+        return {
+            name: this.name,
+            description: this.description
+        }
+    }
+
+
+
 }

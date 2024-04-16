@@ -107,7 +107,7 @@ export default function Page({ params }) {
 
     return (
         <>
-            <div className='flex flex-col'>
+            <div className='flex flex-col border mx-2 my-3 rounded'>
                <SubmissionMessage showPopup={showPopup} Message={message} Type={messageType}/>
                 <div className="">
                     <DashboardHeader title={"Membership"}></DashboardHeader>

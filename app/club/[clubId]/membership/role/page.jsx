@@ -1,0 +1,59 @@
+'use client'
+import SubmissionMessage from "@/app/club/[clubId]/membership/manage/SubmissionMessage";
+import DashboardHeader from "@/components/DashboardHeader";
+import AddRoleDialog from "@/app/club/[clubId]/membership/role/add-role-dialog";
+import {useEffect, useState} from "react";
+
+export default function RolePage(){
+    const [roles,setRoles] = useState([]);
+
+    useEffect(() => {
+        //call api to get roles
+        fetch('/api/roles', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json())
+            .then(data => {
+                setRoles(data);
+            })
+    } ,[]);
+
+
+    return (
+        <>
+            <div className='flex flex-col border mx-2 my-3 rounded'>
+                {/*<SubmissionMessage showPopup={showPopup} Message={message} Type={messageType}/>*/}
+                <div className="">
+                    <DashboardHeader title={"Membership"}></DashboardHeader>
+                    <h2 className="font-bold m-5">Role Management</h2>
+                    <button onClick={() => document.getElementById('my_modal_1').showModal()} className="mx-3 btn btn-outline">Add Role</button>
+                </div>
+
+                <AddRoleDialog id='my_modal_1'/>
+                <table className="table table-zebra w-full">
+                    <thead>
+                    <tr>
+                        <th>Role Name</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {roles.map((role) => (
+                        <tr key={role.id}>
+                            <td>{role.name}</td>
+                            <td className='p-2'>
+                                <button className="btn btn-outline mr-2">Edit</button>
+                                <button className="btn btn-outline">Delete</button>
+                            </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+
+            </div>
+        </>
+
+    )
+}

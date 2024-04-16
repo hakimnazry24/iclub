@@ -13,12 +13,15 @@ export default function clubProgramPage({params}) {
     const {clubId} = params;
     console.log(params);
     return (
-        <div className="">
+        <div className="mx-3 my-3 border  rounded ">
             <DashboardHeader title={"Program"}></DashboardHeader>
             <Link
-                className="mx-3.5 my-10 p-3 rounded-3xl text-indigo-600 font-bold border-2 border-indigo-600 hover:text-white hover:bg-indigo-600 "
+                className="link-primary text-sm font-bold hover:underline mt-5 ml-5"
                 href="./program/add-program">Add New Programme</Link>
-            <table className="mt-5 table w-full text-left overflow-hidden" id="program-table">
+            <Link
+                className="link-primary text-sm font-bold hover:underline mt-5 ml-5"
+                href="./program/add-event">Calendar View</Link>
+            <table className="my-5  table table-zebra  overflow-hidden" id="program-table">
                 <thead>
                 <tr>
                     <td>No</td>
@@ -33,8 +36,10 @@ export default function clubProgramPage({params}) {
                 <tbody>
                 <tr>
                     <td>1</td>
-                    <td className="text-indigo-600 hover:text-indigo-600/80">
-                        Motion-U Commune: Induction Day
+                    <td >
+                        <Link href={'./program/1'} className="text-indigo-600 hover:text-indigo-600/80">
+                            Web Development Workshop
+                        </Link>
                     </td>
                     <td>Nisa</td>
                     <td>16-03-2024</td>
