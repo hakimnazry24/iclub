@@ -21,7 +21,7 @@ export default function SubmissionMessage({showPopup, Message,MessageType}) {
     }, [MessageType]);
 
     return (
-        <div role="alert" className={` ${showPopup ? "alert show" : "alert"} m-5 w-fit z-50 absolute transition-all duration-200 ease-in-out `}>
+        <div role="alert" className={` ${showPopup ? "alert show" : "alert"} m-5 w-fit z-50 absolute right-0 transition-all duration-200 ease-in-out `}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                  className={` ${alertType} shrink-0 w-6 h-6`}>
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"

@@ -5,6 +5,7 @@ import {useMembershipService} from "@/app/Services/MembershipService";
 import {Member} from "@/Domain/Entities/Member";
 import {useEffect, useState} from "react";
 import SubmissionMessage from "@/app/club/[clubId]/membership/manage/SubmissionMessage";
+import BackButton from "@/components/BackButton";
 
 
 const MessageTypes={
@@ -108,11 +109,15 @@ export default function Page({ params }) {
     return (
         <>
             <div className='flex flex-col border mx-2 my-3 rounded'>
-               <SubmissionMessage showPopup={showPopup} Message={message} Type={messageType}/>
-                <div className="">
-                    <DashboardHeader title={"Membership"}></DashboardHeader>
-                    <h2 className="font-bold m-5">Membership Management</h2>
+                <SubmissionMessage showPopup={showPopup} Message={message} Type={messageType}/>
 
+                <div className="">
+
+                    <div className="flex items-center mx-5">
+                        <BackButton/>
+                        <DashboardHeader title={"Membership"}/>
+                    </div>
+                    <h2 className="font-bold m-5">Membership Management</h2>
                 </div>
                 <div>
                     <div className=" bg-base-100 ">
