@@ -11,12 +11,12 @@ export default function addProgramPage({ params }) {
   const { clubId } = params;
   return (
 
-      <div className="">
+      <div className="mx-3 my-3 border  rounded">
         <DashboardHeader title={"Program"}></DashboardHeader>
         <div className="mx-5 my-5">
           <h2 className="text-xl font-bold text-indigo-600">Add New Program</h2>
           <form action={ addNewProgram } >
-            <table className="w-full">
+            <table className="w-full ">
               <tbody>
               <tr>
                 <td>Program name</td>

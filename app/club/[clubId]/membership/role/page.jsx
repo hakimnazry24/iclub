@@ -4,6 +4,9 @@ import DashboardHeader from "@/components/DashboardHeader";
 import AddRoleDialog from "@/app/club/[clubId]/membership/role/add-role-dialog";
 import {useEffect, useState} from "react";
 import BackButton from "@/components/BackButton";
+// font awesome
+import { FaEdit,FaTrash } from "react-icons/fa"
+
 
 export default function RolePage(){
     const [roles,setRoles] = useState([]);
@@ -48,8 +51,15 @@ export default function RolePage(){
                         <tr key={role.id}>
                             <td>{role.name}</td>
                             <td className='p-2'>
-                                <button className="btn btn-outline mr-2">Edit</button>
-                                <button className="btn btn-outline">Delete</button>
+                                <button className="btn btn-ghost rounded-3xl ">
+                                    {/*    edit svg*/}
+                                    <FaEdit/>
+
+                                </button>
+                                <button className="btn btn-ghost rounded-3xl">
+                                {/*    outline trash can*/}
+                                    <FaTrash/>
+                                </button>
                             </td>
                         </tr>
                     ))}
