@@ -44,7 +44,7 @@ model MemberInfo {
 }
 
 model User {
-  id          String   @id @default(uuid())
+  id        String   @id @default(uuid())
   username    String   @unique
   fullname    String
   email       String   @unique
@@ -55,14 +55,15 @@ model User {
 
 model Program {
   id                String      @id @default(uuid())
-  name              String
-  description       String
-  dateStart         DateTime
-  dateEnd           DateTime
-  location          String
-  totalParticipants Int
-  committee         Committee[]
-  status            String
+  name              String?     @default("No Name")
+  description       String?   @default("No Description")
+  dateStart         DateTime?  @default(now())
+  dateEnd           DateTime?   @default(now())
+  location          String?    @default("No Location")
+  budget            Decimal?  @default(0)
+  totalParticipants Int?     @default(0)
+  committees        Committee[]
+  status            String?  @default("Pending")
 }
 
 model Committee {

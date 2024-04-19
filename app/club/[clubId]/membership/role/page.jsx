@@ -6,23 +6,42 @@ import {useEffect, useState} from "react";
 import BackButton from "@/components/BackButton";
 // font awesome
 import { FaEdit,FaTrash } from "react-icons/fa"
+import {useQuery} from "@tanstack/react-query";
 
 
 export default function RolePage(){
     const [roles,setRoles] = useState([]);
+    const [hasSubmitted, setHasSubmitted] = useState(false);
+
+    const funQuery = useQuery({
+        queryKey: ['roles'],
+        queryFn: async () => {
+            const response = await fetch('/api/roles', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const result = await response.json();
+            setRoles(result);
+            setHasSubmitted(false)
+            return result;
+        },
+        // onSuccess: (data) => {
+        //     setRoles(data);
+        //     setHasSubmitted(false)
+        // }
+
+    })
 
     useEffect(() => {
-        //call api to get roles
-        fetch('/api/roles', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
+        (
+        async ()=>{
+            if(hasSubmitted){
+                await funQuery.refetch();
             }
-        }).then(res => res.json())
-            .then(data => {
-                setRoles(data);
-            })
-    } ,[]);
+        })()
+    }, [hasSubmitted,funQuery]);
 
 
     return (
@@ -38,7 +57,7 @@ export default function RolePage(){
                     <button onClick={() => document.getElementById('my_modal_1').showModal()} className="mx-4 btn btn-sm ">Add Role</button>
                 </div>
 
-                <AddRoleDialog id='my_modal_1'/>
+                <AddRoleDialog id='my_modal_1' setHasSubmitted={setHasSubmitted} />
                 <table className="table table-zebra w-full">
                     <thead>
                     <tr>
@@ -47,22 +66,28 @@ export default function RolePage(){
                     </tr>
                     </thead>
                     <tbody>
-                    {roles.map((role) => (
-                        <tr key={role.id}>
-                            <td>{role.name}</td>
-                            <td className='p-2'>
-                                <button className="btn btn-ghost rounded-3xl ">
-                                    {/*    edit svg*/}
-                                    <FaEdit/>
+                    {funQuery.isFetching ? <tr><td>Loading...</td></tr> : (
+                        <>
+                            {
+                                funQuery.data.map((role) => (
+                                    <tr key={role.id}>
+                                        <td>{role.name}</td>
+                                        <td className='p-2'>
+                                            <button className="btn btn-ghost rounded-3xl ">
+                                                {/*    edit svg*/}
+                                                <FaEdit/>
 
-                                </button>
-                                <button className="btn btn-ghost rounded-3xl">
-                                {/*    outline trash can*/}
-                                    <FaTrash/>
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
+                                            </button>
+                                            <button className="btn btn-ghost rounded-3xl">
+                                                {/*    outline trash can*/}
+                                                <FaTrash/>
+                                            </button>
+                                        </td>
+                                    </tr>))
+                            }
+                    </>
+
+                        )}
                     </tbody>
                 </table>
 

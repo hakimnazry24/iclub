@@ -1,16 +1,39 @@
 import {Role} from "@/Domain/Entities/Role";
+import {useMutation} from "@tanstack/react-query";
 
-export default  function AddRoleDialog({id}) {
+export default  function AddRoleDialog({id,setHasSubmitted}) {
+
+
+    const roleMut= useMutation({
+        mutationKey: ['roles'],
+        mutationFn: async (role) => {
+            const response = await fetch('/api/roles', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(role)
+
+            });
+            return await response.json();
+        },
+        onSuccess: (data) => {
+            // setRoles(data);
+
+            alert("Role Added Successfully");
+            document.getElementById(id).close();
+            setHasSubmitted(true);
+        },
+        onError: (error) => {
+            console.error(error);
+            alert("Error Adding Role");
+        }
+    })
 
     const submitRole= async (role) => {
-        return await fetch('/api/roles', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(role)
 
-        });
+        const res = await roleMut.mutateAsync(role);
+        return res;
     }
     const addRole = async (e) => {
 
@@ -18,11 +41,12 @@ export default  function AddRoleDialog({id}) {
         try{
             const roleName = e.target[0].value;
             const role = new Role(null, roleName,"");
-            const response = await submitRole(role);
-            if(response.status === 200){
-                alert("Role Added Successfully");
-                document.getElementById(id).close();
-            }
+            // const response = await submitRole(role);
+            // if(response.status === 200){
+            //     alert("Role Added Successfully");
+            //     document.getElementById(id).close();
+            // }
+            await submitRole(role);
 
         }catch (e) {
             console.error(e);

@@ -6,6 +6,7 @@ import {Member} from "@/Domain/Entities/Member";
 import {useEffect, useState} from "react";
 import SubmissionMessage from "@/app/club/[clubId]/membership/manage/SubmissionMessage";
 import BackButton from "@/components/BackButton";
+import {useQuery} from "@tanstack/react-query";
 
 
 const MessageTypes={
@@ -28,18 +29,16 @@ export default function Page({ params }) {
     const [message, setMessage] = useState("Member Registered Successfully");
 
     useEffect(() => {
-        //call api to get roles
-        fetch('/api/roles', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => res.json())
-            .then(data => {
-                setRoles(data);
-            })
-
-
+        // //call api to get roles
+        // fetch('/api/roles', {
+        //     method: 'GET',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        // }).then(res => res.json())
+        //     .then(data => {
+        //         setRoles(data);
+        //     })
 
         if (showPopup) {
             const timer = setTimeout(() => {
@@ -49,6 +48,21 @@ export default function Page({ params }) {
             return () => clearTimeout(timer);
         }
     }, [showPopup]);
+
+    useQuery({
+        queryKey: ['roles'],
+        queryFn: async () => {
+            const response = await fetch('/api/roles', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const result = await response.json();
+            setRoles(result);
+            return result;
+        }
+    })
 
     const validate = () => {
         if (username === "" || telephone === "" || email === "" || role === "") {
