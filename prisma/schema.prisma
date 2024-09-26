@@ -3,59 +3,82 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
 model Club {
-  id          String       @id @default(auto()) @map("_id") @db.ObjectId
-  name        String       @unique
+  // id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  id          String   @id @default(uuid())
+  name        String   @unique
   description String
-  dateCreated DateTime     @default(now())
-  Membership  Membership[]
+  dateCreated DateTime @default(now())
+  Members     Member[]
 }
 
-model Membership {
-  id               String      @id @default(auto()) @map("_id") @db.ObjectId
-  User             User?       @relation(fields: [userId], references: [id])
-  userId           String?     @db.ObjectId
-  club             Club        @relation(fields: [clubId], references: [id])
-  joinDate         DateTime    @default(now())
-  membershipStatus Boolean     @default(true)
-  posititon        String      @default("active member")
-  commitee         Committee[]
+model Member {
+  id               String       @id @default(uuid())
+  name             String?
+  email            String?
+  telephone        String?
+  club             Club?        @relation(fields: [clubId], references: [id])
+  joinDate         DateTime?    @default(now())
+  membershipStatus String?      @default("Active")
+  position         String?      @default("active member")
+  clubId           String?
+  Role             Role?        @relation(fields: [roleId], references: [id])
+  roleId           String?
+  MemberInfo       MemberInfo[]
+  Committee        Committee[]
+}
 
-  clubId String @db.ObjectId
+model MemberInfo {
+  id          String   @id @default(uuid())
+  member      Member   @relation(fields: [memberId], references: [id])
+  memberId    String
+  fullname    String
+  email       String   @unique
+  phoneNo     Int      @unique
+  dateCreated DateTime @default(now())
+  dateUpdated DateTime @updatedAt
 }
 
 model User {
-  id          String       @id @default(auto()) @map("_id") @db.ObjectId
-  username    String       @unique
+  id        String   @id @default(uuid())
+  username    String   @unique
   fullname    String
-  email       String       @unique
-  phoneNo     Int          @unique
-  membership  Membership[]
-  dateCreated DateTime     @default(now())
-  dateUpdated DateTime     @updatedAt
+  email       String   @unique
+  phoneNo     Int      @unique
+  dateCreated DateTime @default(now())
+  dateUpdated DateTime @updatedAt
 }
 
 model Program {
-  id                String      @id @default(auto()) @map("_id") @db.ObjectId
-  name              String
-  description       String
-  dateStart         DateTime
-  dateEnd           DateTime
-  location          String
-  totalParticipants Int
-  committee         Committee[]
-  status            String
+  id                String      @id @default(uuid())
+  name              String?     @default("No Name")
+  description       String?   @default("No Description")
+  dateStart         DateTime?  @default(now())
+  dateEnd           DateTime?   @default(now())
+  location          String?    @default("No Location")
+  budget            Decimal?  @default(0)
+  totalParticipants Int?     @default(0)
+  committees        Committee[]
+  status            String?  @default("Pending")
 }
 
 model Committee {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(uuid())
+  Program   Program? @relation(fields: [programId], references: [id])
+  programId String?
+  Members   Member?  @relation(fields: [memberId], references: [id])
+  memberId  String?
+}
 
-  Program      Program?    @relation(fields: [programId], references: [id])
-  programId    String?     @db.ObjectId
-  Membership   Membership? @relation(fields: [membershipId], references: [id])
-  membershipId String?     @db.ObjectId
+model Role {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String
+  dateCreated DateTime @default(now())
+  dateUpdated DateTime @updatedAt
+  Member      Member[]
 }

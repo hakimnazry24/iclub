@@ -9,11 +9,8 @@ export default function clubDashboardPage({ params }) {
   const { clubId } = params;
   console.log(params);
   return (
-    <div className="grid grid-cols-12">
-      <div className="col-span-2">
-        <SideBar clubId={clubId}></SideBar>
-      </div>
-      <div className="col-span-10">
+
+      <div className="col-span-10 border mx-2 my-3 rounded">
         <DashboardHeader title={"Dashboard"}></DashboardHeader>
         <div className="grid grid-cols-2 gap-10 p-8">
           <a href="general">
@@ -30,6 +27,5 @@ export default function clubDashboardPage({ params }) {
           </a>
         </div>
       </div>
-    </div>
   );
 }

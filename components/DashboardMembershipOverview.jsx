@@ -1,9 +1,13 @@
 export default function DashboardMembershipOverview() {
   return (
-    <div>
-      <h1 className="p-5 font-bold text-2xl text-indigo-600 shadow-lg rounded-2xl">
-        Membership
-      </h1>
-    </div>
+      <div>
+          <div className="card  bg-base-100 shadow-md border transition-shadow hover:shadow-xl">
+              <div className="card-body">
+                  <h2 className="card-title">Membership Overview</h2>
+                  <p>Check membership details</p>
+
+              </div>
+          </div>
+      </div>
   );
 }

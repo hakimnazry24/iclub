@@ -7,6 +7,17 @@ th, td {
     border-bottom: 1px solid #ddd;
 }
 
-#program-table > tr:nth-child(even) {
-    background-color: #f2f2f2;
+/*#program-table > tr:nth-child(even) {*/
+/*    background-color: #f2f2f2;*/
+/*}*/
+
+.alert {
+    /* your other styles */
+    opacity: 0; /* initially hide the popup */
+
+}
+
+.alert.show {
+    opacity: 100%; /* show the popup */
+
 }
